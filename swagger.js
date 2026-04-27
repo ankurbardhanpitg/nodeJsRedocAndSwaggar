@@ -182,6 +182,7 @@ function setupSwagger(app, port) {
       explorer: true,
       swaggerOptions: {
         url: "/api-docs.json",
+        defaultModelsExpandDepth: -1,
       },
     })
   );
