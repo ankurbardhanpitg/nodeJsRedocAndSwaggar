@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "1777271416547",
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": "1777271964023",
+      "name": "Ankur Bardhan",
+      "email": "ankur@gmail.com"
+    },
+    {
+      "id": "1777271979440",
+      "name": "rohit Bardhan",
+      "email": "rohit@gmail.com"
+    }
+  ]
+}
