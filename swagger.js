@@ -2,65 +2,6 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const path = require("path");
 
-function generateMarkdownDocs(spec) {
-  const sections = [];
-  const info = spec.info || {};
-  const servers = spec.servers || [];
-  const paths = spec.paths || {};
-
-  sections.push(`# ${info.title || "API Documentation"}`);
-  sections.push("");
-  sections.push(`**Version:** ${info.version || "N/A"}`);
-  sections.push("");
-  sections.push(`${info.description || "No description provided."}`);
-  sections.push("");
-
-  if (servers.length) {
-    sections.push("## Servers");
-    sections.push("");
-    servers.forEach((server) => {
-      sections.push(`- ${server.url}`);
-    });
-    sections.push("");
-  }
-
-  sections.push("## Endpoints");
-  sections.push("");
-
-  Object.entries(paths).forEach(([route, methods]) => {
-    Object.entries(methods).forEach(([method, operation]) => {
-      sections.push(`### ${method.toUpperCase()} ${route}`);
-      sections.push("");
-      sections.push(operation.summary || "No summary provided.");
-      sections.push("");
-
-      if (operation.parameters && operation.parameters.length) {
-        sections.push("**Parameters**");
-        sections.push("");
-        operation.parameters.forEach((parameter) => {
-          sections.push(
-            `- \`${parameter.name}\` (${parameter.in}) - ${
-              parameter.required ? "required" : "optional"
-            }`
-          );
-        });
-        sections.push("");
-      }
-
-      if (operation.responses) {
-        sections.push("**Responses**");
-        sections.push("");
-        Object.entries(operation.responses).forEach(([statusCode, response]) => {
-          sections.push(`- \`${statusCode}\`: ${response.description || "No description"}`);
-        });
-        sections.push("");
-      }
-    });
-  });
-
-  return sections.join("\n");
-}
-
 function createSwaggerSpec(port) {
   return swaggerJsdoc({
     definition: {
@@ -207,23 +148,10 @@ function createSwaggerSpec(port) {
 
 function setupSwagger(app, port) {
   const swaggerSpec = createSwaggerSpec(port);
-  const markdownDocs = generateMarkdownDocs(swaggerSpec);
 
   app.get("/api-docs.json", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
-  });
-
-  app.get("/api-docs/download/json", (req, res) => {
-    res.setHeader("Content-Type", "application/json");
-    res.setHeader("Content-Disposition", 'attachment; filename="api-docs.json"');
-    res.send(swaggerSpec);
-  });
-
-  app.get("/api-docs/download/md", (req, res) => {
-    res.setHeader("Content-Type", "text/markdown; charset=utf-8");
-    res.setHeader("Content-Disposition", 'attachment; filename="api-docs.md"');
-    res.send(markdownDocs);
   });
 
   app.get("/api-docs/download", (req, res) => {
