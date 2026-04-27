@@ -18,7 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 setupSwagger(app, PORT);
 
 app.get("/", (req, res) => {
-  res.send("Express server is running with Users API. Swagger docs: /api-docs");
+  res.send(
+    "Express server is running with Users API. Swagger docs: /api-docs | ReDoc: /redoc | Downloads: /api-docs/download"
+  );
 });
 
 app.use("/api/users", createUsersRouter(db));

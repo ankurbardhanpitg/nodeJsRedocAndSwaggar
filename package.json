@@ -18,6 +18,7 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "json-server": "^0.17.4",
+    "redoc": "^2.5.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }
