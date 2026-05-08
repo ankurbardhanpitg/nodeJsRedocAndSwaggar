@@ -33,6 +33,13 @@ function createSwaggerSpec(port) {
       ],
       components: {
         schemas: {
+          Message: {
+            type: "object",
+            properties: {
+              message: { type: "string", example: "Operation successful" },
+            },
+            required: ["message"],
+          },
           User: {
             type: "object",
             properties: {
@@ -127,6 +134,12 @@ function createSwaggerSpec(port) {
               },
               400: {
                 description: "Validation error",
+                content: {
+                  "application/json": {
+                    schema: { $ref: "#/components/schemas/Message" },
+                    example: { message: "name and email are required" },
+                  },
+                },
               },
             },
           },
@@ -179,9 +192,21 @@ function createSwaggerSpec(port) {
             responses: {
               200: {
                 description: "User deleted successfully",
+                content: {
+                  "application/json": {
+                    schema: { $ref: "#/components/schemas/Message" },
+                    example: { message: "User deleted successfully" },
+                  },
+                },
               },
               404: {
                 description: "User not found",
+                content: {
+                  "application/json": {
+                    schema: { $ref: "#/components/schemas/Message" },
+                    example: { message: "User not found" },
+                  },
+                },
               },
             },
           },
@@ -226,6 +251,12 @@ function createSwaggerSpec(port) {
               },
               400: {
                 description: "Validation error",
+                content: {
+                  "application/json": {
+                    schema: { $ref: "#/components/schemas/Message" },
+                    example: { message: "name and email are required" },
+                  },
+                },
               },
             },
           },
@@ -303,9 +334,21 @@ function createSwaggerSpec(port) {
             responses: {
               200: {
                 description: "Company deleted successfully",
+                content: {
+                  "application/json": {
+                    schema: { $ref: "#/components/schemas/Message" },
+                    example: { message: "Company deleted successfully" },
+                  },
+                },
               },
               404: {
                 description: "Company not found",
+                content: {
+                  "application/json": {
+                    schema: { $ref: "#/components/schemas/Message" },
+                    example: { message: "Company not found" },
+                  },
+                },
               },
             },
           },
