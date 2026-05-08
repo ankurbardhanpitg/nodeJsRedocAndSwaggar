@@ -3,11 +3,17 @@ const express = require("express");
 function createUsersRouter(db) {
   const router = express.Router();
 
+  /**
+   * here we are getting all the users from the database
+   **/
   router.get("/", (req, res) => {
     const users = db.get("users").value();
     res.status(200).json(users);
   });
 
+  /**
+   * here we are creating a new user
+   **/
   router.post("/", (req, res) => {
     const { name, email } = req.body;
 
@@ -27,6 +33,9 @@ function createUsersRouter(db) {
     return res.status(201).json(newUser);
   });
 
+  /**
+   * here we are updating a user
+   **/
   router.put("/:id", (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
@@ -49,6 +58,9 @@ function createUsersRouter(db) {
     return res.status(200).json(updatedUser);
   });
 
+  /**
+   * here we are deleting a user
+   **/
   router.delete("/:id", (req, res) => {
     const { id } = req.params;
     const existingUser = db.get("users").find({ id }).value();

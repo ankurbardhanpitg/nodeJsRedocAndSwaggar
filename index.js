@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const jsonServer = require("json-server");
 const path = require("path");
 const createUsersRouter = require("./routes/users");
+const createCompanyRouter = require("./routes/company");
 const setupSwagger = require("./swagger");
 
 const app = express();
@@ -19,11 +20,12 @@ setupSwagger(app, PORT);
 
 app.get("/", (req, res) => {
   res.send(
-    "Express server is running with Users API. Swagger docs: /api-docs | ReDoc: /redoc | Downloads: /api-docs/download"
+    "Express server is running with Users + Companies API. Swagger docs: /api-docs | ReDoc: /redoc | Downloads: /api-docs/download"
   );
 });
 
 app.use("/api/users", createUsersRouter(db));
+app.use("/api/companies", createCompanyRouter(db));
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
