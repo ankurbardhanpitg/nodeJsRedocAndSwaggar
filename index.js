@@ -5,7 +5,7 @@ const jsonServer = require("json-server");
 const path = require("path");
 const createUsersRouter = require("./routes/users");
 const createCompanyRouter = require("./routes/company");
-const setupSwagger = require("./swagger");
+const { setupSwagger } = require("./swagger");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +16,7 @@ const db = jsonServerRouter.db;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/core", express.static(path.join(__dirname, "core")));
 setupSwagger(app, PORT);
 
 app.get("/", (req, res) => {

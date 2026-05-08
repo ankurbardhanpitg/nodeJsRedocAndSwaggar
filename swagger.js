@@ -403,10 +403,13 @@ function setupSwagger(app, port) {
       </head>
       <body>
         <redoc spec-url="/api-docs.json"></redoc>
-        <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+        <script src="/core/redoc.standalone.js"></script>
       </body>
     </html>`);
   });
 }
 
-module.exports = setupSwagger;
+module.exports = {
+  setupSwagger,
+  createSwaggerSpec,
+};

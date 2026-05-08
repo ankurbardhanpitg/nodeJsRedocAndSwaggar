@@ -7,6 +7,7 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "json-server": "json-server --watch db.json --port 3001",
+    "docs:redoc": "node scripts/generate-redoc-html.js --out docs/redoc.html --title \"NodeJS Redoc and Swagger API\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
